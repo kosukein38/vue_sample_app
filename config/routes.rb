@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get 'home/index'
     get 'top', to: 'top#index'
     resources :customers, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+    resources :bottles, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   end
 
   # Defines the root path route ("/")
