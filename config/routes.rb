@@ -6,6 +6,13 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   get '/api/test', to: 'application#test'
 
+  # shop
+  namespace :shop do
+    get 'home/index'
+    get 'top', to: 'top#index'
+    resources :customers, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+  end
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
