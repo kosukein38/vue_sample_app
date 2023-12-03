@@ -49,15 +49,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_04_063236) do
   end
 
   create_table "keeped_bottles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "shop_id", null: false
+    t.bigint "bottle_id", null: false
     t.bigint "customer_id", null: false
-    t.integer "bottle_number", null: false
+    t.string "bottle_number", null: false
+    t.integer "state", null: false
     t.date "open_date"
     t.date "expiration_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["bottle_id"], name: "index_keeped_bottles_on_bottle_id"
     t.index ["customer_id"], name: "index_keeped_bottles_on_customer_id"
-    t.index ["shop_id"], name: "index_keeped_bottles_on_shop_id"
   end
 
   create_table "shops", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -73,6 +74,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_04_063236) do
   add_foreign_key "bottles", "shops"
   add_foreign_key "customers", "shops"
   add_foreign_key "employees", "shops"
+  add_foreign_key "keeped_bottles", "bottles"
   add_foreign_key "keeped_bottles", "customers"
-  add_foreign_key "keeped_bottles", "shops"
 end
