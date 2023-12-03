@@ -10,8 +10,12 @@ Rails.application.routes.draw do
   namespace :shop do
     get 'home/index'
     get 'top', to: 'top#index'
-    resources :customers, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+    resources :customers, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
+      resources :keeped_bottles, only: [:new, :create, :show, :edit, :update, :destroy]
+    end
     resources :bottles, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+    resources :keeped_bottles, only: [:index]
+    # resources :keeped_bottles, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   end
 
   # Defines the root path route ("/")

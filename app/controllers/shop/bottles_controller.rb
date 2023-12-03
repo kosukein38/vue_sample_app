@@ -1,8 +1,8 @@
 class Shop::BottlesController < ShopController
-  before_action :set_shop, only: [:create, :destroy, :show, :update]
+  before_action :set_shop, only: [:index, :create, :destroy, :show, :update]
 
   def index
-    bottles = Bottle.all
+    bottles = @shop.bottles
     render json: bottles
   end
 

@@ -1,8 +1,8 @@
 class Shop::CustomersController < ShopController
-  before_action :set_shop, only: [:create, :destroy, :show, :update]
+  before_action :set_shop, only: [:index, :create, :destroy, :show, :update]
 
   def index
-    customers = Customer.all
+    customers = @shop.customers
     render json: customers
   end
 
@@ -11,9 +11,7 @@ class Shop::CustomersController < ShopController
 
   def show
     customer = @shop.customers.find(params[:id])
-    render json: customer
-  rescue ActiveRecord::RecordNotFound
-    render json: { error: 'Customer not found' }, status: :not_found
+    render json: customer, include: [:keeped_bottles]
   end
 
   def create
