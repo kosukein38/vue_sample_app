@@ -34,20 +34,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_04_063236) do
     t.index ["shop_id"], name: "index_customers_on_shop_id"
   end
 
-  create_table "employees", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "shop_id", null: false
-    t.string "name", null: false
-    t.string "email", null: false
-    t.string "crypted_password"
-    t.string "salt"
-    t.string "tel"
-    t.integer "role"
-    t.string "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["shop_id"], name: "index_employees_on_shop_id"
-  end
-
   create_table "keeped_bottles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "bottle_id", null: false
     t.bigint "customer_id", null: false
@@ -69,11 +55,27 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_04_063236) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_shops_on_email", unique: true
+  end
+
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "shop_id", null: false
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "crypted_password"
+    t.string "salt"
+    t.string "tel"
+    t.integer "role"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["shop_id"], name: "index_users_on_shop_id"
   end
 
   add_foreign_key "bottles", "shops"
   add_foreign_key "customers", "shops"
-  add_foreign_key "employees", "shops"
   add_foreign_key "keeped_bottles", "bottles"
   add_foreign_key "keeped_bottles", "customers"
+  add_foreign_key "users", "shops"
 end
