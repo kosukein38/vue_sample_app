@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
-  # before_create :create_relation_shop_example
+  before_create :create_relation_shop_example
   belongs_to :shop
   
   validates :name, presence: true, length: { maximum: 255 }
@@ -13,11 +13,11 @@ class User < ApplicationRecord
   private
 
   # フォームができたら削除（新規登録時にshopも作る）
-  # def create_relation_shop_example
-  #   shop = Shop.create!(
-  #     name: "#{self.name}ショップ",
-  #     email: email
-  #   )
-  #   self.shop_id = shop.id
-  # end
+  def create_relation_shop_example
+    shop = Shop.create!(
+      name: "#{self.name}さんの店舗",
+      email: email
+    )
+    self.shop_id = shop.id
+  end
 end
