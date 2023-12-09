@@ -48,6 +48,6 @@ class Shop::CustomersController < ShopController
   end
 
   def set_shop
-    @shop = Shop.find(1)
+    @shop = Shop.find(@current_user.shop.id)
   end
 end

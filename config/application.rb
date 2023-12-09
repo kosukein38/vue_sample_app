@@ -38,8 +38,17 @@ module VueSampleApp
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
-    # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    # cookieを使えるように
+    config.middleware.use ActionDispatch::Cookies
+    # セッションを使えるように
+    config.middleware.use ActionDispatch::Session::CookieStore
+    # 本番向け
+    config.action_dispatch.cookies_same_site_protection = :none
+    config.middleware.use ActionDispatch::ContentSecurityPolicy::Middleware
+    config.action_controller.forgery_protection_origin_check = false
+    config.action_dispatch.cookies_same_site_protection = nil
+    # Skip views, helpers and assets when generating a new resource.
     config.generators do |g|
       g.test_framework :rspec,
         fixtures: false,
