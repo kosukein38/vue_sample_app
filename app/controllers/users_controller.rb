@@ -5,6 +5,9 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
+    user.create_shop_with_user
+    # 新規登録時のユーザーは必ずmanagerに
+    user.role = "manager"
     if user.save
       render json: { user: user }, status: :ok
     else
@@ -15,6 +18,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation).merge(shop_id: 1)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end

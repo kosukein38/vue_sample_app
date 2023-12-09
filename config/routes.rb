@@ -18,12 +18,14 @@ Rails.application.routes.draw do
     get 'top', to: 'top#index'
     get 'shop_info', to: 'shops#show'
     put 'shop_info', to: 'shops#update'
-    
+
+    resources :users, only: [:index, :create, :show, :update, :destroy]
     resources :customers, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
       resources :keeped_bottles, only: [:new, :create, :show, :edit, :update, :destroy]
     end
     resources :bottles, only: [:index, :new, :create, :show, :edit, :update, :destroy]
     resources :keeped_bottles, only: [:index]
+
     # resources :keeped_bottles, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   end
 
