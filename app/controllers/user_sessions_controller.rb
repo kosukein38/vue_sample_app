@@ -1,6 +1,6 @@
 class UserSessionsController < ApplicationController
-  skip_before_action :require_login, only: [:create]
-  skip_before_action :verify_authenticity_token, only: :create
+  skip_before_action :require_login, only: [:create, :show]
+  skip_before_action :verify_authenticity_token, only: [:create, :show]
   after_action :set_csrf_token_header, only: [:create, :show]
 
   def create
@@ -13,7 +13,11 @@ class UserSessionsController < ApplicationController
   end
 
   def show
-    render json: { message: "logged in", userId: @current_user.id }
+    if current_user
+      render json: { logged_in: true, userId: @current_user.id }
+    else 
+      render json: { logged_in: false }
+    end
   end
 
   def destroy
