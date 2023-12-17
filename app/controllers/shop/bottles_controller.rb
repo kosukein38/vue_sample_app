@@ -1,5 +1,6 @@
 class Shop::BottlesController < ShopController
   before_action :set_shop, only: [:index, :create, :destroy, :show, :update]
+  after_action :set_csrf_token_header
 
   def index
     bottles = @shop.bottles
