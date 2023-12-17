@@ -24,7 +24,6 @@ class User < ApplicationRecord
   private
 
   def manager_must_exist_at_least_one_person_per_shop
-    binding.pry
     if role == 'manager' && shop.users.manager.count <= 1
       errors.add(:base, "店舗には最低1人以上のマネージャーが必要です。")
       throw :abort

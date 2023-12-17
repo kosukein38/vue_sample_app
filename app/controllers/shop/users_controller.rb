@@ -29,7 +29,6 @@ class Shop::UsersController < ShopController
   end
   
   def update
-    binding.pry
     user = @shop.users.find(params[:id])
     if user.update(user_params)
       render json: user, status: :ok
