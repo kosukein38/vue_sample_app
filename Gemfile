@@ -52,3 +52,6 @@ group :development do
   gem 'rubocop-rails', require: false
 end
 
+group :production, :staging do
+  gem 'unicorn'
+end
